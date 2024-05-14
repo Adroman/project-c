@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3888070689208131639}
   - component: {fileID: 5846126111692744590}
   - component: {fileID: 7773277237868410213}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4792562693036491986}
   - component: {fileID: 6365947563857140215}
   - component: {fileID: 1472688364521541707}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NormalEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,6 +193,11 @@ MonoBehaviour:
   SpriteTransform: {fileID: 2523470748832337253}
   RotationAngleOffset: 270
   Waypoints: []
+  EnemiesOnField: {fileID: 11400000, guid: a653a24c085499a4e8a9971c6d9ebcdc, type: 2}
+  EnemiesWaiting: {fileID: 11400000, guid: f43cbcef6e11503479fb56c3e46a8abf, type: 2}
+  TowerUi: {fileID: 0}
+  CardShopUi: {fileID: 0}
+  CardHandUi: {fileID: 0}
   OnDie:
     m_PersistentCalls:
       m_Calls:
@@ -292,7 +297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8106105060761621869}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2523470748832337253}
   - component: {fileID: 4924406224736501936}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3320225110353684852}
   - component: {fileID: 3909362108576453957}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +508,7 @@ GameObject:
   - component: {fileID: 5065967316874805750}
   - component: {fileID: 5719500296227128344}
   - component: {fileID: 8091745641797769284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +585,7 @@ GameObject:
   - component: {fileID: 1256107634422465528}
   - component: {fileID: 6889279612517127328}
   - component: {fileID: 2008098762369451055}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HealthUi
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,6 +15,13 @@ namespace Variables
             Value -= value;
         }
 
+        public void SubtractValueDontGoNegative(int value)
+        {
+            int newValue = Value - value;
+            if (newValue < 0) newValue = 0;
+            Value = newValue;
+        }
+
         public bool IsAtLeast(int value)
         {
             return Value >= value;

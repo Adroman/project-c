@@ -15,16 +15,14 @@ public class EnemyBehavior : MonoBehaviour
     public List<Transform> Waypoints = new();
 
     private Transform _currentWaypoint;
+    private bool _dead = false;
+    
     public int WaypointIndex { get; private set; }
     public float SqrDistanceToNextWaypoint => (_currentWaypoint.position - transform.position).sqrMagnitude;
 
     public UnityEvent<EnemyBehavior> OnDie;
     public UnityEvent<EnemyBehavior> OnFinish;
     public UnityEvent<EnemyBehavior> OnTakeDamage;
-
-    private void OnEnable()
-    {
-    }
 
     private void Start()
     {
@@ -77,7 +75,9 @@ public class EnemyBehavior : MonoBehaviour
 
     public void TakeDamage(BulletBehavior bullet)
     {
-        Hp -= bullet.Damage;
+        float damage = bullet.Damage - Armor;
+        if (damage < 1) damage = 1; 
+        Hp -= damage;
         Hp = Mathf.Clamp(Hp, 0, MaxHp);
         OnTakeDamage.Invoke(this);
         if (Hp <= 0)
@@ -88,8 +88,11 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
-        OnDie.Invoke(this);
+        if (!_dead)
+        {
+            _dead = true;
+            OnDie.Invoke(this);
+        }
     }
 
     public void DestroyEnemy()

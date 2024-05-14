@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Towers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Collider2D))]
 public class TileBehavior : MonoBehaviour
 {
+    public TowerManager TowerManager;
     public Color PickedColor;
     public Color NonPickedColor;
+
+    public TowerBehavior BuiltTower;
 
     private SpriteRenderer _spriteRenderer;
     private bool _selected;
@@ -27,26 +30,41 @@ public class TileBehavior : MonoBehaviour
     private void OnMouseEnter()
     {
         _selected = true;
-        _spriteRenderer.color = PickedColor;
+        if (BuiltTower == null)
+        {
+            _spriteRenderer.color = PickedColor;
+        }
+        else
+        {
+            BuiltTower.ShowRange();
+        }
     }
 
     private void OnMouseExit()
     {
         _selected = false;
-        _spriteRenderer.color = NonPickedColor;
+        if (BuiltTower == null)
+        {
+            _spriteRenderer.color = NonPickedColor;
+        }
+        else
+        {
+            BuiltTower.HideRange();
+        }
     }
 
     private void OnMouseDown()
     {
         if (_selected)
         {
-            if (_eventSystem.IsPointerOverGameObject())
+            if (BuiltTower != null)
             {
-                Debug.Log("Clicked over UI");
+                BuiltTower = TowerManager.UpgradeTower(this);
             }
             else
             {
-                Debug.Log("Clicked on selected");
+                BuiltTower = TowerManager.BuildTower(this);
+                _spriteRenderer.color = NonPickedColor;
             }
         }
         else
