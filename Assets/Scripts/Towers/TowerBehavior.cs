@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using SpecialEffects;
 using UnityEngine;
 using Variables;
 using Random = UnityEngine.Random;
@@ -8,16 +10,19 @@ using Random = UnityEngine.Random;
 namespace Towers
 {
     [RequireComponent(typeof(CircleCollider2D))]
+    [RequireComponent(typeof(CircleRenderer))]
     public class TowerBehavior : MonoBehaviour
     {
         public Transform RotatingPart;
         public float RotationAngleOffset;
         public Transform ShootingPoint;
         public BulletBehavior BulletToSpawn;
-    
+
+        public string Name;
         public float MinDamage;
         public float MaxDamage;
         public float FireRate;
+        public float PreviewRange;
 
         public float Range
         {
@@ -25,7 +30,7 @@ namespace Towers
             set
             {
                 _collider.radius = value;
-                AdjustRendererPositions(value);
+                _circleRenderer.CalculateCircle(value);
             }
         }
 
@@ -37,7 +42,9 @@ namespace Towers
 
         private CircleCollider2D _collider;
         private LineRenderer _rangeRenderer;
+        private CircleRenderer _circleRenderer;
         private readonly List<EnemyBehavior> _enemiesToTarget = new();
+        private BaseSpecialEffect[] _specialEffects;
 
         private float _lastFired;
         private float _reloadTime;
@@ -48,6 +55,7 @@ namespace Towers
         {
             _collider = GetComponent<CircleCollider2D>();
             _rangeRenderer = GetComponent<LineRenderer>();
+            _circleRenderer = GetComponent<CircleRenderer>();
         }
 
         private void Start()
@@ -56,7 +64,8 @@ namespace Towers
             _reloadTime = 1f / FireRate;
             _hasRotatingPart = RotatingPart != null;
             _hasShootingPoint = ShootingPoint != null;
-            AdjustRendererPositions(Range);
+            _specialEffects = GetComponents<BaseSpecialEffect>();
+            Range = PreviewRange;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -102,30 +111,27 @@ namespace Towers
             bullet.Damage = Random.Range(MinDamage, MaxDamage);
             bullet.Target = target;
 
+            foreach (var specialEffect in _specialEffects)
+            {
+                specialEffect.AddToGameObject(bullet.gameObject);
+            }
+
             _lastFired = Time.time;
+        }
+
+        public bool Unlocked()
+        {
+            return IsUnlocked == null || IsUnlocked.IsEnabled;
         }
 
         public bool CanBuildIt()
         {
-            if (IsUnlocked != null && !IsUnlocked.IsEnabled)
-                return false;
             return PriceCurrency.IsAtLeast(Price);
         }
 
         public void BuyTower()
         {
             PriceCurrency.SubtractValue(Price);
-        }
-
-        private void AdjustRendererPositions(float range)
-        {
-            _rangeRenderer.positionCount = 36;
-            _rangeRenderer.loop = true;
-            for (int i = 0; i < 36; i++)
-            {
-                float degree =  10 * i * Mathf.Deg2Rad;
-                _rangeRenderer.SetPosition(i, transform.position + new Vector3(range * Mathf.Cos(degree), range * Mathf.Sin(degree)));
-            }
         }
 
         public void ShowRange()
@@ -136,6 +142,40 @@ namespace Towers
         public void HideRange()
         {
             _rangeRenderer.enabled = false;
+        }
+
+        public string PrepareInfoText()
+        {
+            var sb = new StringBuilder();
+            sb.Append(Name).AppendLine().AppendLine();
+            sb.Append("Damage: ").Append(MinDamage).Append('-').Append(MaxDamage).AppendLine();
+            sb.Append("Fire rate: ").Append(FireRate).AppendLine();
+            sb.Append("Range: ").Append(Range).AppendLine();
+            foreach (var specialEffect in _specialEffects)
+            {
+                sb.Append(specialEffect.GetDescription()).AppendLine();
+            }
+
+            sb.AppendLine();
+
+            if (UpgradedTower != null)
+            {
+                if (!UpgradedTower.IsUnlocked.IsEnabled)
+                {
+                    sb.Append("Upgrade is locked.");
+                }
+                else
+                {
+                    sb.Append("Upgrade price: ").Append(UpgradedTower.Price).Append(" gold").AppendLine();
+                    sb.Append("Click on the tower to upgrade it.");
+                }
+            }
+            else
+            {
+                sb.Append("Tower is at maximum level.");
+            }
+
+            return sb.ToString();
         }
     }
 }

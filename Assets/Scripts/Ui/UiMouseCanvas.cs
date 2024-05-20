@@ -11,13 +11,11 @@ namespace Ui
         
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Mouse entered UI");
             OnMouseEntered.RaiseEvent();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            Debug.Log("Mouse left UI");
             OnMouseExited.RaiseEvent();
         }
     }

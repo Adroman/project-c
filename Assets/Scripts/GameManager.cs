@@ -38,7 +38,15 @@ public class GameManager : MonoBehaviour
     public GameObject InGameUi;
     public GameObject GameOverUi;
     public GameObject Tiles;
-    
+
+    private bool _lifeLost = false;
+    private UiTutorialEnablerOnce _endTutorial;
+
+    private void Awake()
+    {
+        _endTutorial = GetComponent<UiTutorialEnablerOnce>();
+    }
+
     private void OnEnable()
     {
         Gold.Value = GoldInitialValue;
@@ -56,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     public void LoseLife()
     {
+        _lifeLost = true;
         Health.SubtractValue(1);
         if (Health.Value == 0)
         {
@@ -77,11 +86,23 @@ public class GameManager : MonoBehaviour
         EnemiesOnField.SubtractValue(1);
         if (EnemiesOnField.Value == 0 && EnemiesWaiting.Value == 0)
         {
-            TowerUi.SetActive(false);
-            CardShopUi.SetActive(true);
-            CardHandUi.SetActive(true);
-            TowerManager.SelectedTower = null;
-            UiSelectedTower.SelectNewTower(null);
+            NextTurn();
         }
+    }
+
+    private void NextTurn()
+    {
+        if (!_lifeLost)
+        {
+            //Gold.Value += 5;
+        }
+
+        _lifeLost = false;
+        TowerUi.SetActive(false);
+        CardShopUi.SetActive(true);
+        CardHandUi.SetActive(true);
+        _endTutorial.Enable();
+        TowerManager.SelectedTower = null;
+        UiSelectedTower.SelectNewTower(null);
     }
 }

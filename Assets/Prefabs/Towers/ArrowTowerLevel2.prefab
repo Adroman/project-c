@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 8645254998013932919}
   - component: {fileID: 7638526036415623444}
   - component: {fileID: 545435252506421808}
+  - component: {fileID: 5264881452473543321}
   m_Layer: 9
   m_Name: ArrowTowerLevel2
   m_TagString: Untagged
@@ -235,13 +236,15 @@ MonoBehaviour:
   RotationAngleOffset: 270
   ShootingPoint: {fileID: 7582430216838605074}
   BulletToSpawn: {fileID: 6501065830851289366, guid: 7320a22596733544aa2a094fd29616e4, type: 3}
+  Name: Level 2 Ballista tower
   MinDamage: 100
   MaxDamage: 300
   FireRate: 2.5
+  PreviewRange: 3.5
   Price: 5
   PriceCurrency: {fileID: 11400000, guid: b722512f23423224db1866d383ac2eb2, type: 2}
   IsUnlocked: {fileID: 11400000, guid: c4e0fcbcc31fd464c88120f2ced1dcf9, type: 2}
-  UpgradedTower: {fileID: 0}
+  UpgradedTower: {fileID: 3717737272795186736, guid: 1ae64adf18b08dc49b6b238759c4702e, type: 3}
 --- !u!212 &7638526036415623444
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -398,3 +401,16 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &5264881452473543321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9002605170337670284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614fa0d61331402183e0306a9e69418b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Points: 36

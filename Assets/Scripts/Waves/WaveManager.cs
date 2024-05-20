@@ -45,7 +45,7 @@ namespace Waves
         private IEnumerator SpawnEnemies(WaveTemplate template)
         {
             float hp = template.BaseHp * Mathf.Pow(1.2f, WaveNumber.Value - 1);
-            float armor = template.BaseArmor * Mathf.Pow(1.2f, WaveNumber.Value - 1);
+            float armor = template.BaseArmor * Mathf.Pow(WaveNumber.Value - 1, 1.2f);
             int amount = template.BaseAmount + Difficulty.Value;
             EnemiesWaiting.AddValue(amount);
 

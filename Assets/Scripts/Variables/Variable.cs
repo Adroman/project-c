@@ -5,6 +5,8 @@ namespace Variables
 {
     public class Variable<T> : ScriptableObject
     {
+        public string Name;
+        
         public GameEvent OnValueChanged;
         
         [SerializeField] private T _value;

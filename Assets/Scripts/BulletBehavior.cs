@@ -40,6 +40,6 @@ public class BulletBehavior : MonoBehaviour
 
     private void EnemyHit(EnemyBehavior enemy)
     {
-        enemy.TakeDamage(this);
+        enemy.ApplyBulletDamage(this);
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Ui;
+using UnityEngine;
 
 namespace Towers
 {
@@ -15,7 +16,8 @@ namespace Towers
             }
             if (!SelectedTower.CanBuildIt())
             {
-                Debug.Log("Not enough resources to build the tower or the tower is not unlocked.");
+                Debug.Log("Not enough resources to build the tower.");
+                UiErrorMessage.Instance.ShowMessage("Not enough gold to build the tower.");
                 return null;
             }
 
@@ -26,7 +28,7 @@ namespace Towers
                 new Vector3(tilePosition.x, tilePosition.y),
                 tileTransform.rotation,
                 transform);
-
+            
             return tower;
         }
 
@@ -41,9 +43,17 @@ namespace Towers
 
             var upgradedTowerPrefab = towerToUpgrade.UpgradedTower;
 
+            if (!upgradedTowerPrefab.Unlocked())
+            {
+                Debug.Log("Tower is not unlocked for upgrade.");
+                UiErrorMessage.Instance.ShowMessage("Tower upgrade is locked.");
+                return towerToUpgrade;
+            }
+            
             if (!upgradedTowerPrefab.CanBuildIt())
             {
-                Debug.Log("Not enough resources to upgrade the tower or the upgrade is not unlocked.");
+                Debug.Log("Not enough resources to upgrade the tower.");
+                UiErrorMessage.Instance.ShowMessage("Not enough gold to upgrade the tower.");
                 return towerToUpgrade;
             }
 

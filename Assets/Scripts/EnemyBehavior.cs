@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SpecialEffects;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -73,12 +74,23 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    public void TakeDamage(BulletBehavior bullet)
+    public void ApplyBulletDamage(BulletBehavior bullet)
     {
-        float damage = bullet.Damage - Armor;
+        TakeDamage(bullet.Damage);
+        
+        foreach (var specialEffect in bullet.GetComponents<BaseSpecialEffect>())
+        {
+            specialEffect.ApplySpecialEffect(this);
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        damage -= Armor;
         if (damage < 1) damage = 1; 
         Hp -= damage;
         Hp = Mathf.Clamp(Hp, 0, MaxHp);
+        
         OnTakeDamage.Invoke(this);
         if (Hp <= 0)
         {

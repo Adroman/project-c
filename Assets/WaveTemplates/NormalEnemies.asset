@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PrefabToSpawn: {fileID: 6365947563857140215, guid: 6c449a33351de524e86135f4e15eafbe, type: 3}
   BaseAmount: 10
-  BaseHp: 100
-  BaseArmor: 10
-  Speed: 3
+  BaseHp: 50
+  BaseArmor: 5
+  Speed: 2
   MinimumWaveNumber: 1
-  Interval: 1
+  Interval: 0.5

@@ -30,6 +30,9 @@ namespace Cards
         public CardBehavior GoldAndSkillPrefab;
         public int GoldAndSkillAmount;
 
+        public Canvas CardHandTutorial;
+        public Canvas EndTurnTutorial;
+        
         private void Awake()
         {
             //Random.InitState(Environment.TickCount);
@@ -135,6 +138,11 @@ namespace Cards
             if (Hand.Count == 0)
             {
                 EndTurnButton.gameObject.SetActive(true);
+                if (CardHandTutorial.gameObject.activeInHierarchy)
+                {
+                    EndTurnTutorial.gameObject.SetActive(true);
+                }
+                CardHandTutorial.gameObject.SetActive(false);
             }
         }
     }

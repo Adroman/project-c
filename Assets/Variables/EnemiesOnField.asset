@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b83e84ff91d4375a487f28011ed063d, type: 3}
   m_Name: EnemiesOnField
   m_EditorClassIdentifier: 
+  Name: Enemies on field
   OnValueChanged: {fileID: 0}
   _value: 0

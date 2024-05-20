@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b83e84ff91d4375a487f28011ed063d, type: 3}
   m_Name: Mana
   m_EditorClassIdentifier: 
+  Name: Mana
   OnValueChanged: {fileID: 11400000, guid: dad42f6e3d47bf1459a99793c7896d80, type: 2}
   _value: 0

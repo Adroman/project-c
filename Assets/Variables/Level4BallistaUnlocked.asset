@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cca4596c1c4b959df9cda694222c7c, type: 3}
   m_Name: Level4BallistaUnlocked
   m_EditorClassIdentifier: 
+  Name: Level 4 Ballista Unlocked
   OnValueChanged: {fileID: 0}
   _value: 0

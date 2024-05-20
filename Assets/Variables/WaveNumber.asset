@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b83e84ff91d4375a487f28011ed063d, type: 3}
   m_Name: WaveNumber
   m_EditorClassIdentifier: 
+  Name: Wave Number
   OnValueChanged: {fileID: 11400000, guid: ccd344ca6f1b516428a995a777ceb5e2, type: 2}
   _value: 0

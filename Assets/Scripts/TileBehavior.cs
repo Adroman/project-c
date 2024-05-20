@@ -1,8 +1,10 @@
 ﻿using Towers;
+using Ui;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(CircleRenderer))]
 public class TileBehavior : MonoBehaviour
 {
     public TowerManager TowerManager;
@@ -10,8 +12,10 @@ public class TileBehavior : MonoBehaviour
     public Color NonPickedColor;
 
     public TowerBehavior BuiltTower;
-
+    public UiTowerInfo TowerInfo;
+    
     private SpriteRenderer _spriteRenderer;
+    private CircleRenderer _circleRenderer;
     private bool _selected;
     private EventSystem _eventSystem;
     
@@ -19,6 +23,7 @@ public class TileBehavior : MonoBehaviour
     {
         _eventSystem = FindObjectOfType<EventSystem>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _circleRenderer = GetComponent<CircleRenderer>();
     }
 
     private void OnEnable()
@@ -32,11 +37,17 @@ public class TileBehavior : MonoBehaviour
         _selected = true;
         if (BuiltTower == null)
         {
-            _spriteRenderer.color = PickedColor;
+            if (TowerManager.SelectedTower != null)
+            {
+                _circleRenderer.CalculateCircle(TowerManager.SelectedTower.PreviewRange);
+                _circleRenderer.ShowCircle();
+                _spriteRenderer.color = PickedColor;
+            }
         }
         else
         {
             BuiltTower.ShowRange();
+            TowerInfo.Show(BuiltTower);
         }
     }
 
@@ -46,10 +57,12 @@ public class TileBehavior : MonoBehaviour
         if (BuiltTower == null)
         {
             _spriteRenderer.color = NonPickedColor;
+            _circleRenderer.HideCircle();
         }
         else
         {
             BuiltTower.HideRange();
+            TowerInfo.Hide();
         }
     }
 
@@ -65,6 +78,7 @@ public class TileBehavior : MonoBehaviour
             {
                 BuiltTower = TowerManager.BuildTower(this);
                 _spriteRenderer.color = NonPickedColor;
+                _circleRenderer.HideCircle();
             }
         }
         else

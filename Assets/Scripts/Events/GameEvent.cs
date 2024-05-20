@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -23,6 +24,9 @@ namespace Events
         {
             for (int i = _listeners.Count - 1; i >= 0; i--)
             {
+                if (i >= _listeners.Count)
+                    continue;
+                
                 _listeners[i].Raise();
             }
         }

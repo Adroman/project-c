@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b83e84ff91d4375a487f28011ed063d, type: 3}
   m_Name: Skills
   m_EditorClassIdentifier: 
+  Name: Skills
   OnValueChanged: {fileID: 11400000, guid: d20fcf68a2b861b4d9182bf6442cceb2, type: 2}
   _value: 0

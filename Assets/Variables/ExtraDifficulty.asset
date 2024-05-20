@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b83e84ff91d4375a487f28011ed063d, type: 3}
   m_Name: ExtraDifficulty
   m_EditorClassIdentifier: 
+  Name: Extra difficulty
   OnValueChanged: {fileID: 11400000, guid: 0eb82ea4ab2772f4ca8b8d66792780fb, type: 2}
   _value: 0

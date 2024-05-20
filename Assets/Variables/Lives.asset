@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b83e84ff91d4375a487f28011ed063d, type: 3}
   m_Name: Lives
   m_EditorClassIdentifier: 
+  Name: Lives
   OnValueChanged: {fileID: 11400000, guid: 53c904498faa6724183c94d12a81d8db, type: 2}
   _value: 10
